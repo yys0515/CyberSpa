@@ -8,744 +8,767 @@
     :root {
       --bg: #0a0a0a;
       --gold: #d4af37;
-      --gold-light: #f0e68c;
-      --text: #f0f0f0;
-      --text-sub: #aaa;
+      --gold-light: #f5e6b3;
+      --text: #e0e0e0;
       --card-bg: #121212;
-      --border: #333;
-      --accent: #8b5cf6;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
+      --border: rgba(212, 175, 55, 0.2);
+      --accent: #d4af37;
+      --btn-primary: #1a1a1a;
+      --btn-hover: #2a2a2a;
+      --pulse: 0 0 12px rgba(212, 175, 55, 0.4);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: var(--bg);
+      background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
       color: var(--text);
-      font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
-      background: radial-gradient(circle at 20% 30%, rgba(10,10,10,0.9) 0%, #000 100%);
+      padding: 20px;
       min-height: 100vh;
-      padding: 16px;
+      overflow-x: hidden;
+      background-attachment: fixed;
     }
-    .container { max-width: 1024px; margin: 0 auto; }
-
-    /* Header */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
     header {
       text-align: center;
-      padding: 24px 0;
+      padding: 25px 0;
+      margin-bottom: 20px;
       position: relative;
-      margin-bottom: 24px;
     }
-    .logo {
+    h1 {
       font-size: 2.8rem;
       font-weight: 800;
-      letter-spacing: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
       margin-bottom: 8px;
+      background: linear-gradient(to right, #d4af37, #ffcc00, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .subtitle {
-      color: var(--text-sub);
       font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.5;
+      opacity: 0.7;
+      letter-spacing: 2px;
     }
-
-    /* Stats Bar */
-    .stats-bar {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 24px;
-      padding: 16px;
-      background: var(--card-bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      min-width: 120px;
-      text-align: center;
-    }
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-sub);
-      margin-bottom: 4px;
-    }
-    .stat-value {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .stat-bar {
-      height: 8px;
-      background: #2a2a2a;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 6px;
-    }
-    .stat-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.4s ease;
-    }
-    .fill-money { background: var(--gold); }
-    .fill-energy { background: var(--accent); }
-    .fill-joy { background: var(--success); }
-    .fill-fatigue { background: var(--danger); }
-
-    /* Main Content */
-    .content {
-      display: grid;
-      grid-template-columns: 1fr 350px;
-      gap: 24px;
-    }
-    @media (max-width: 768px) {
-      .content { grid-template-columns: 1fr; }
-    }
-
-    /* Left Panel */
-    .panel {
+    .screen {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+      padding: 25px;
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       border: 1px solid var(--border);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
     }
-    .panel-title {
+    .screen::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+      z-index: -1;
+    }
+    .screen.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-title {
+      font-size: 1.6rem;
+      margin: 22px 0 16px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: "♨";
       font-size: 1.4rem;
-      margin-bottom: 20px;
+    }
+    .btn {
+      background: var(--btn-primary);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn:hover {
+      background: var(--btn-hover);
+      box-shadow: var(--pulse);
+      transform: translateY(-2px);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      color: #0a0a0a;
+      font-weight: 700;
+    }
+    .btn-gold:hover {
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.7);
+    }
+    .stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 20px 0;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      padding: 12px;
+      background: rgba(20, 20, 20, 0.6);
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .progress-container {
+      height: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 6px;
+      border: 1px solid rgba(212,175,55,0.1);
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--gold), #ffcc00);
+      transition: width 0.3s ease;
+    }
+    .tasks-list {
+      margin: 20px 0;
+      padding-left: 0;
+    }
+    .task-item {
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      background: rgba(20, 20, 20, 0.5);
+      border-radius: 8px;
+      border-left: 3px solid #4CAF50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+    }
+    .task-item.completed {
+      border-left-color: var(--gold);
+      background: rgba(20, 20, 20, 0.3);
+      opacity: 0.9;
+    }
+    .task-item.completed .task-desc::after {
+      content: " ✓";
+      color: #4CAF50;
+      margin-left: 8px;
+    }
+    .task-desc {
+      flex: 1;
+      padding-right: 12px;
+    }
+    .task-progress {
+      font-size: 0.9rem;
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 25px 0;
+    }
+    .location-card {
+      background: rgba(20, 20, 20, 0.6);
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .location-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    .location-title {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
       color: var(--gold);
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .panel-title i {
-      font-size: 1.2rem;
+    .location-title::before {
+      content: "🛁";
+      font-size: 1.4rem;
     }
-
-    /* Tasks */
-    .tasks {
-      margin-bottom: 24px;
-    }
-    .task-item {
-      padding: 14px;
-      background: #1a1a1a;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      border-left: 4px solid var(--gold);
-      position: relative;
-      transition: all 0.2s;
-    }
-    .task-item.done {
-      opacity: 0.7;
-      border-left-color: var(--success);
-    }
-    .task-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
-    .task-name { font-weight: 600; }
-    .task-status { font-size: 0.85rem; }
-    .task-desc {
-      font-size: 0.95rem;
-      color: var(--text-sub);
-      margin-bottom: 8px;
-    }
-    .task-progress {
-      height: 6px;
-      background: #2a2a2a;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .task-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: var(--success);
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-
-    /* Actions */
-    .actions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .action-btn {
-      background: #1a1a1a;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 14px;
-      border-radius: 10px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.95rem;
-      line-height: 1.4;
-      position: relative;
-      overflow: hidden;
-    }
-    .action-btn:hover {
-      background: #252525;
-      transform: translateY(-2px);
-      border-color: var(--gold);
-      box-shadow: 0 4px 12px rgba(212,175,55,0.15);
-    }
-    .action-btn:active {
-      transform: translateY(0);
-    }
-    .action-btn .cost {
-      color: var(--gold);
-      font-weight: 600;
-      float: right;
-      font-size: 0.9rem;
-    }
-    .action-btn .effect {
-      font-size: 0.85rem;
-      color: var(--text-sub);
-      margin-top: 6px;
-      display: block;
-    }
-    .action-btn.locked {
-      opacity: 0.6;
-      cursor: not-allowed;
-      border-color: #333;
-    }
-    .action-btn.locked:hover { transform: none; }
-
-    /* Right Panel (Settings & Achievements) */
-    .right-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .achievements {
-      background: #1a1a1a;
-      border-radius: 12px;
-      padding: 18px;
-      border: 1px solid var(--border);
-    }
-    .ach-title {
-      font-size: 1.2rem;
-      color: var(--gold);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .achievement-list {
+    .actions-list {
       list-style: none;
+      padding: 0;
     }
-    .achievement-item {
-      padding: 10px 0;
-      border-bottom: 1px dashed #333;
+    .action-item {
+      padding: 12px 16px;
+      margin: 8px 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
       font-size: 0.95rem;
-    }
-    .achievement-item:last-child { border-bottom: none; }
-    .achievement-item span {
-      color: var(--text-sub);
-      margin-left: 8px;
-    }
-    .achievement-item.done span {
-      color: var(--success);
-      font-weight: 600;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-block;
-      background: var(--gold);
-      color: #000;
-      padding: 10px 22px;
-      border-radius: 30px;
-      font-weight: 700;
-      text-decoration: none;
-      border: none;
       cursor: pointer;
-      font-size: 0.95rem;
       transition: all 0.2s;
-      text-align: center;
+      border-left: 3px solid transparent;
     }
-    .btn:hover:not(:disabled) {
-      background: #f0e68c;
-      transform: scale(1.03);
+    .action-item:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-left-color: var(--gold);
     }
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
+    .action-cost {
+      float: right;
+      font-weight: 700;
+      color: var(--gold-light);
     }
-    .btn-outline {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-    }
-    .btn-outline:hover:not(:disabled) {
-      background: rgba(212,175,55,0.1);
-    }
-
-    /* Modals */
-    .modal {
+    .dialog {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      backdrop-filter: blur(4px);
       opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
+      pointer-events: none;
+      transition: opacity 0.3s;
     }
-    .modal.active {
+    .dialog.active {
       opacity: 1;
-      visibility: visible;
+      pointer-events: all;
     }
-    .modal-content {
+    .dialog-content {
       background: var(--card-bg);
-      border-radius: 16px;
       width: 90%;
-      max-width: 520px;
-      padding: 32px;
+      max-width: 560px;
+      border-radius: 16px;
+      padding: 30px;
       text-align: center;
       border: 1px solid var(--border);
-      box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
       position: relative;
       transform: scale(0.95);
-      transition: transform 0.3s ease;
+      animation: popIn 0.3s forwards;
+      border-top: 3px solid var(--gold);
     }
-    .modal.active .modal-content {
-      transform: scale(1);
+    @keyframes popIn {
+      to { transform: scale(1); }
     }
-    .modal-title {
-      font-size: 1.6rem;
+    .dialog h2 {
       color: var(--gold);
       margin-bottom: 20px;
+      font-size: 1.8rem;
     }
-    .modal-body {
-      margin-bottom: 24px;
-      line-height: 1.6;
-      color: var(--text);
+    .dialog p {
+      margin: 16px 0;
+      font-size: 1.1rem;
+      line-height: 1.7;
       text-align: left;
-      font-size: 1rem;
+      padding-left: 10px;
+      border-left: 3px solid var(--gold);
+      opacity: 0.95;
     }
-    .modal-body p {
-      margin-bottom: 14px;
-    }
-    .modal-actions {
+    .dialog-btns {
       display: flex;
-      gap: 12px;
       justify-content: center;
-      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 25px;
     }
-
-    /* Toast */
-    .toast {
+    .dialog-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .dialog-close:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--gold);
+    }
+    .notification {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #1a1a1a;
-      color: var(--text);
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.85);
+      color: var(--gold-light);
       padding: 14px 22px;
       border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      font-weight: 600;
       z-index: 1001;
       transform: translateX(200%);
-      transition: transform 0.3s ease;
-      border-left: 4px solid var(--success);
+      transition: transform 0.4s ease-out;
+      border-left: 3px solid var(--gold);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      max-width: 320px;
+      word-break: break-word;
     }
-    .toast.show {
+    .notification.show {
       transform: translateX(0);
     }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 48px;
-      padding: 20px;
-      color: var(--text-sub);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
+    .achievement-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--gold-light);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      margin: 2px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .logo { font-size: 2.2rem; }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    .gender-select, .identity-select {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .gender-option, .identity-option {
+      padding: 12px 24px;
+      background: rgba(20, 20, 20, 0.6);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+      text-align: center;
+      min-width: 100px;
+    }
+    .gender-option.selected, .identity-option.selected {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.1);
+      color: var(--gold);
+    }
+    .disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: rgba(0, 0, 0, 0.3);
+      border-color: rgba(255,255,255,0.05);
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
       .stats-bar { flex-direction: column; }
-      .stat-item { min-width: auto; }
-      .content { grid-template-columns: 1fr; }
-      .actions-grid { grid-template-columns: 1fr; }
+      .locations-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1 class="logo">模拟人生·赛博洗浴中心</h1>
-      <p class="subtitle">黑曜穹顶 · 金箔水道 · AI香氛矩阵 · 恒温38℃雾境汤池｜此刻，你就是真实的「人」</p>
+      <h1>模拟人生·赛博洗浴中心</h1>
+      <div class="subtitle">顶奢体验 · 合法合规 · 剧情驱动</div>
     </header>
 
-    <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-label">资金</div>
-        <div class="stat-value" id="money">500¥</div>
-        <div class="stat-bar"><div class="stat-fill fill-money" id="money-bar"></div></div>
+    <!-- 主菜单 -->
+    <div id="screen-menu" class="screen active">
+      <h2 class="section-title">欢迎光临</h2>
+      <p>请选择您的性别：</p>
+      <div class="gender-select">
+        <div class="gender-option" data-gender="male">👨 男性</div>
+        <div class="gender-option" data-gender="female">👩 女性</div>
+        <div class="gender-option" data-gender="other">🧑‍🤝‍🧑 不限</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-label">精力</div>
-        <div class="stat-value" id="energy">20/50</div>
-        <div class="stat-bar"><div class="stat-fill fill-energy" id="energy-bar"></div></div>
+
+      <p style="margin: 25px 0 15px;">请选择您的身份（当前仅开放）：</p>
+      <div class="identity-select">
+        <div class="identity-option selected" data-id="ordinary">【普通人】</div>
+        <div class="identity-option disabled" data-id="investigator">【神秘顾客】（未解锁）</div>
+        <div class="identity-option disabled" data-id="richkid">【富家子弟】（未解锁）</div>
+        <div class="identity-option disabled" data-id="influencer">【网红博主】（未解锁）</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-label">愉悦值</div>
-        <div class="stat-value" id="joy">48/100</div>
-        <div class="stat-bar"><div class="stat-fill fill-joy" id="joy-bar"></div></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">疲劳值</div>
-        <div class="stat-value" id="fatigue">75/100</div>
-        <div class="stat-bar"><div class="stat-fill fill-fatigue" id="fatigue-bar"></div></div>
+
+      <div class="btn-group" style="text-align: center; margin-top: 25px;">
+        <button id="start-btn" class="btn btn-gold">▶ 开始体验</button>
       </div>
     </div>
 
-    <div class="content">
-      <!-- Left Panel -->
-      <div class="panel">
-        <h2 class="panel-title">♨️ 公共浴池（男宾区）</h2>
-        <div class="tasks">
-          <div class="task-item" id="task1">
-            <div class="task-header">
-              <span class="task-name">任务一：疲劳值 ≤ 35</span>
-              <span class="task-status" id="task1-status">进行中</span>
-            </div>
-            <div class="task-desc">让身体真正松弛下来，告别加班疲惫感</div>
-            <div class="task-progress"><div class="task-fill" id="task1-fill"></div></div>
-          </div>
-          <div class="task-item" id="task2">
-            <div class="task-header">
-              <span class="task-name">任务二：愉悦值 ≥ 75</span>
-              <span class="task-status" id="task2-status">进行中</span>
-            </div>
-            <div class="task-desc">找到属于你的快乐频率，哪怕只是一刻微光</div>
-            <div class="task-progress"><div class="task-fill" id="task2-fill"></div></div>
-          </div>
-          <div class="task-item" id="task3">
-            <div class="task-header">
-              <span class="task-name">任务三：听到3条八卦</span>
-              <span class="task-status" id="task3-status">进行中</span>
-            </div>
-            <div class="task-desc">人间烟火气，最抚凡人心 —— 耳朵比眼睛更懂生活</div>
-            <div class="task-progress"><div class="task-fill" id="task3-fill"></div></div>
+    <!-- 游戏主界面 -->
+    <div id="screen-game" class="screen">
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-label">资金</div>
+          <div class="stat-value" id="money">500¥</div>
+          <div class="progress-container">
+            <div class="progress-bar" id="money-bar" style="width: 100%"></div>
           </div>
         </div>
-
-        <h2 class="panel-title">📍 行动选择</h2>
-        <div class="actions-grid" id="actions">
-          <!-- Rendered by JS -->
+        <div class="stat-item">
+          <div class="stat-label">精力</div>
+          <div class="stat-value" id="stamina">20/50</div>
+          <div class="progress-container">
+            <div class="progress-bar" id="stamina-bar" style="width: 40%"></div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">愉悦值</div>
+          <div class="stat-value" id="joy">48/100</div>
+          <div class="progress-container">
+            <div class="progress-bar" id="joy-bar" style="width: 48%"></div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">疲劳值</div>
+          <div class="stat-value" id="fatigue">75/100</div>
+          <div class="progress-container">
+            <div class="progress-bar" id="fatigue-bar" style="width: 75%; background: linear-gradient(90deg, #ff6b6b, #ff9e00);"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Right Panel -->
-      <div class="right-panel">
-        <div class="panel">
-          <h2 class="panel-title">⚙️ 设置</h2>
-          <div style="margin-bottom: 16px;">
-            <button class="btn btn-outline" id="saveBtn">💾 存档</button>
-          </div>
-          <div style="margin-bottom: 16px;">
-            <button class="btn btn-outline" id="loadBtn">📂 读档</button>
-          </div>
-          <div>
-            <button class="btn btn-outline" id="restartBtn">🔄 返回主菜单</button>
-          </div>
-        </div>
+      <h2 class="section-title">今日任务</h2>
+      <ul class="tasks-list" id="tasks-list">
+        <li class="task-item" data-task="1">
+          <div class="task-desc">疲劳值降至35或以下</div>
+          <div class="task-progress">75 → 35</div>
+        </li>
+        <li class="task-item" data-task="2">
+          <div class="task-desc">愉悦值达75或以上</div>
+          <div class="task-progress">48 → 75</div>
+        </li>
+        <li class="task-item" data-task="3">
+          <div class="task-desc">听到3条八卦</div>
+          <div class="task-progress">0/3</div>
+        </li>
+      </ul>
 
-        <div class="achievements">
-          <h3 class="ach-title">🏆 成就系统</h3>
-          <ul class="achievement-list">
-            <li class="achievement-item" id="ach-spend">
-              💰 花费跨越5个档位（500¥ → 9999999¥）<span>未达成</span>
-            </li>
-            <li class="achievement-item" id="ach-gossip">
-              👂 听到5条不同八卦<span>未达成</span>
-            </li>
-            <li class="achievement-item" id="ach-perfect">
-              ✨ 愉悦值100且疲劳值0<span>未达成</span>
-            </li>
+      <h2 class="section-title">探索区域</h2>
+      <div class="locations-grid">
+        <div class="location-card" data-location="bath">
+          <div class="location-title">公共浴池</div>
+          <ul class="actions-list">
+            <li class="action-item" data-action="soak">泡在暖暖的池子里（-5精，-120¥）</li>
+            <li class="action-item" data-action="scrub">来搓澡吧！（-5精，-80¥）</li>
+            <li class="action-item" data-action="wander">瞎溜达（+10精）</li>
+          </ul>
+        </div>
+        <div class="location-card" data-location="staff">
+          <div class="location-title">员工区（通关后解锁）</div>
+          <ul class="actions-list" id="staff-actions" style="display:none;">
+            <li class="action-item" data-action="work-scrub">搓澡阿姨：有些人一旦搓过就不在（-8精，+65¥）</li>
+            <li class="action-item" data-action="work-clean">清洁阿姨：洗刷刷洗刷刷（-10精，+120¥）</li>
           </ul>
         </div>
       </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <button id="settings-btn" class="btn">⚙ 设置</button>
+        <button id="achievements-btn" class="btn">🏅 成就</button>
+      </div>
     </div>
 
-    <footer>
-      <p>© 2024 模拟人生·赛博洗浴中心｜所有服务合法合规｜本游戏不含任何现实消费诱导</p>
-    </footer>
-  </div>
-
-  <!-- Modals -->
-  <div class="modal" id="startModal">
-    <div class="modal-content">
-      <h2 class="modal-title">欢迎光临</h2>
-      <div class="modal-body">
-        <p>您正步入「云顶·栖光」洗浴中心——国内首家融合航天级恒温系统与非遗搓澡技艺的顶奢空间。</p>
-        <p><strong>请选择您的身份：</strong></p>
-        <p>🔹 <strong>【普通人】</strong>：下班打工人，500元开启今日疗愈（当前路线）</p>
-        <p>🔸 <em>其他身份暂未开放（市场调研中）</em></p>
-      </div>
-      <div class="modal-actions">
-        <button class="btn" id="startNormal">▶️ 以普通人身份进入</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal" id="guideModal">
-    <div class="modal-content">
-      <h2 class="modal-title">新手引导</h2>
-      <div class="modal-body">
-        <p>✨ <strong>1. 查看任务</strong>：左侧3个金色边框任务，完成即得200¥奖励</p>
-        <p>✨ <strong>2. 数值变化</strong>：每次行动影响资金/精力/愉悦/疲劳（见顶部状态栏）</p>
-        <p>✨ <strong>3. 探索场地</strong>：点击右侧「公共浴池」中的按钮开始行动</p>
-        <p>⚠️ <strong>注意</strong>：资金归零将提前结束今日体验；通关后可选择继续打工！</p>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-outline" id="skipGuide">跳过</button>
-        <button class="btn" id="startGuide">开始体验</button>
+    <!-- 设置弹窗 -->
+    <div id="dialog-settings" class="dialog">
+      <div class="dialog-content">
+        <button class="dialog-close">&times;</button>
+        <h2>⚙ 设置中心</h2>
+        <p><strong>当前存档</strong></p>
+        <p id="save-info">暂无存档</p>
+        <div class="dialog-btns">
+          <button id="save-btn" class="btn btn-gold">💾 保存存档</button>
+          <button id="load-btn" class="btn" disabled>📂 读取存档</button>
+        </div>
+        <p style="margin-top: 25px;"><strong>其他选项</strong></p>
+        <div class="dialog-btns">
+          <button id="restart-btn" class="btn">🔄 重新开始</button>
+          <button id="back-to-menu-btn" class="btn">🏠 返回主菜单</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal" id="gameOverModal">
-    <div class="modal-content">
-      <h2 class="modal-title">🔚 余额不足</h2>
-      <div class="modal-body">
-        <p>账户余额已归零，今日暂停营业。</p>
-        <p>感谢您选择「云顶·栖光」，期待下次为您服务。</p>
-      </div>
-      <div class="modal-actions">
-        <button class="btn" id="restartGameOver">返回主菜单</button>
+    <!-- 成就弹窗 -->
+    <div id="dialog-achievements" class="dialog">
+      <div class="dialog-content">
+        <button class="dialog-close">&times;</button>
+        <h2>🏅 成就系统</h2>
+        <p>本身份专属成就（仅此一次领取）：</p>
+        <div id="achievements-list" style="text-align: left; margin: 16px 0 20px; padding-left: 10px;">
+          <div class="achievement-badge" id="ach-spend">花费金额：0/10档</div>
+          <div class="achievement-badge" id="ach-gossip">八卦收集：0/5档</div>
+          <div class="achievement-badge" id="ach-perfect">完美状态：未达成</div>
+        </div>
+        <p id="ach-reward-info" style="margin-top: 10px; font-size: 0.95rem;"></p>
+        <div class="dialog-btns">
+          <button id="ach-claim-btn" class="btn btn-gold" disabled>🎁 领取奖励</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal" id="winModal">
-    <div class="modal-content">
-      <h2 class="modal-title">🎉 恭喜通关！</h2>
-      <div class="modal-body">
-        <p>您已圆满完成全部三项疗愈任务，身心达到黄金平衡态。</p>
-        <p><strong>现在，您有两个选择：</strong></p>
-        <p>✅ <strong>继续当前游戏</strong>：解锁「搓澡阿姨」「清洁阿姨」打工功能，赚取更多资金深度体验</p>
-        <p>🔙 <strong>返回主菜单</strong>：重新选择身份开启新旅程</p>
-      </div>
-      <div class="modal-actions">
-        <button class="btn" id="continueGame">💼 继续体验（解锁打工）</button>
-        <button class="btn btn-outline" id="backToMenu">🏠 返回主菜单</button>
+    <!-- 通关弹窗 -->
+    <div id="dialog-complete" class="dialog">
+      <div class="dialog-content">
+        <button class="dialog-close">&times;</button>
+        <h2>🎉 恭喜通关！</h2>
+        <p>您已圆满完成全部三项任务，获得「顶奢体验者」称号！</p>
+        <p style="margin-top: 20px; font-weight: bold;">现在您可以：</p>
+        <div class="dialog-btns">
+          <button id="continue-btn" class="btn btn-gold">➡ 继续体验（解锁打工）</button>
+          <button id="menu-btn" class="btn">🏠 返回主菜单</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal" id="settingModal">
-    <div class="modal-content">
-      <h2 class="modal-title">⚙️ 设置中心</h2>
-      <div class="modal-body">
-        <p><strong>当前存档：</strong><br>
-        <span id="saveInfo">暂无存档</span></p>
-        <p><strong>操作说明：</strong></p>
-        <ul style="text-align: left; margin-left: 20px; margin-top: 12px;">
-          <li>💾 <strong>存档</strong>：覆盖保存当前进度（含时间戳与资金）</li>
-          <li>📂 <strong>读档</strong>：恢复最后一次存档状态</li>
-          <li>🔄 <strong>返回主菜单</strong>：放弃当前进度，回到初始界面</li>
-        </ul>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-outline" id="closeSetting">关闭</button>
-      </div>
+    <!-- 通知栏 -->
+    <div id="notification" class="notification"></div>
+
+    <!-- 底部 -->
+    <div class="footer">
+      模拟人生·赛博洗浴中心 v1.0 | 合法合规 · 纯虚构剧情 · 无真实商业关联
     </div>
   </div>
-
-  <div class="toast" id="toast">操作成功！</div>
 
   <script>
-    // ======================
-    // GAME STATE & CONFIG
-    // ======================
+    // ===== 全局状态 =====
     const gameState = {
-      // Core stats
+      gender: 'other',
+      identity: 'ordinary',
       money: 500,
-      energy: { current: 20, max: 50 },
-      joy: { current: 48, max: 100 },
-      fatigue: { current: 75, max: 100 },
-
-      // Tasks
+      stamina: 20,
+      maxStamina: 50,
+      joy: 48,
+      maxJoy: 100,
+      fatigue: 75,
+      maxFatigue: 100,
+      gossipCount: 0,
       tasks: {
-        task1: { done: false, target: 35, type: 'fatigue', reward: 200 }, // fatigue <= 35
-        task2: { done: false, target: 75, type: 'joy', reward: 200 },    // joy >= 75
-        task3: { done: false, count: 0, total: 3, reward: 200 }         // gossip count
+        1: { completed: false, target: 35 }, // fatigue <= 35
+        2: { completed: false, target: 75 }, // joy >= 75
+        3: { completed: false, target: 3 }   // gossip >= 3
       },
-
-      // Achievements
       achievements: {
-        spend: { done: false, levels: 0, threshold: [500, 1000, 5000, 20000, 100000, 1000000, 9999999] },
-        gossip: { done: false, count: 0, total: 5 },
-        perfect: { done: false, joy: 0, fatigue: 0 } // track when joy==100 && fatigue==0
+        spend: 0, // 0~10
+        gossip: 0, // 0~5
+        perfect: false // joy===100 && fatigue===0
       },
-
-      // Game flow
-      isStarted: false,
-      isGuided: false,
-      isWin: false,
-      isWorking: false, // unlocked after win
-      lastSave: null,
-
-      // Gossip bank (realistic, spa-themed)
+      isGameStarted: false,
+      saveData: null,
+      // 八卦库（安全合规，生活化）
       gossips: [
-        "隔壁大哥说他刚在‘星尘汤’泡完，皮肤像剥了壳的鸡蛋，还送了他一瓶小样！",
-        "搓澡阿姨透露：VIP包间新上了‘量子按摩椅’，能同步脑电波放空30分钟。",
-        "保洁大姐讲：昨天有个客人把限量版‘龙井雪芽’浴盐当糖吃了，当场被请去喝养生茶。",
-        "前台妹妹悄悄说：富二代A哥每周三都来，专挑凌晨两点，只为独享‘银河雾池’。",
-        "汗蒸房大爷爆料：B区桑拿房地板下埋了和田玉粉，踩上去脚底发热还养肾！",
-        "按摩师姐姐聊：新来的AI理疗师能识别128种肌肉紧张模式，比老中医还准。",
-        "休息区阿姨叹气：上个月有客人睡着了，梦话都在谈并购案，醒来直接签了SPA年卡。",
-        "收银小哥八卦：网红‘泡泡酱’今天没直播，蹲在儿童汤池陪娃玩浮力鸭子…",
-        "足疗师傅说：最近好多程序员来拔罐，罐印排成二进制，我们叫它‘Hello World’套餐。",
-        "茶吧姐姐笑：有对情侣在‘云栖茶室’求婚，戒指藏在冻顶乌龙茶冻里，甜过初恋。"
-      ]
+        "隔壁搓澡师傅刚升主管，据说要带徒弟了",
+        "新来的精油是进口的，味道特别淡雅",
+        "前台小妹说今天VIP包厢全满，连预约都排到下周",
+        "听说顶楼恒温泳池今晚加了薰衣草香氛",
+        "休息区新上了无糖绿豆汤，解腻又清爽",
+        "按摩师老张昨天帮一位客人缓解了十年肩周炎",
+        "桑拿房温度刚刚校准过，比上周更均匀了",
+        "保洁阿姨夸这季毛巾柔软度是三年来最好的",
+        "茶吧新添了云南古树普洱，免费续杯",
+        "儿童托管区新增了国学绘本角，家长都说好"
+      ],
+      // 花费档位映射（¥）
+      spendTiers: [500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 500000, 9999999],
+      // 八卦档位映射（条数）
+      gossipTiers: [5, 8, 12, 16, 20]
     };
 
-    // ======================
-    // DOM ELEMENTS
-    // ======================
+    // ===== DOM 元素缓存 =====
     const els = {
-      money: document.getElementById('money'),
+      menu: document.getElementById('screen-menu'),
+      game: document.getElementById('screen-game'),
+      startBtn: document.getElementById('start-btn'),
+      genderOptions: document.querySelectorAll('.gender-option'),
+      identityOptions: document.querySelectorAll('.identity-option'),
+      settingsDialog: document.getElementById('dialog-settings'),
+      achievementsDialog: document.getElementById('dialog-achievements'),
+      completeDialog: document.getElementById('dialog-complete'),
+      notification: document.getElementById('notification'),
+      saveInfo: document.getElementById('save-info'),
+      saveBtn: document.getElementById('save-btn'),
+      loadBtn: document.getElementById('load-btn'),
+      restartBtn: document.getElementById('restart-btn'),
+      backToMenuBtn: document.getElementById('back-to-menu-btn'),
+      achList: document.getElementById('achievements-list'),
+      achRewardInfo: document.getElementById('ach-reward-info'),
+      achClaimBtn: document.getElementById('ach-claim-btn'),
+      continueBtn: document.getElementById('continue-btn'),
+      menuBtn: document.getElementById('menu-btn'),
+      settingsBtn: document.getElementById('settings-btn'),
+      achievementsBtn: document.getElementById('achievements-btn'),
+      staffActions: document.getElementById('staff-actions'),
+      tasksList: document.getElementById('tasks-list'),
+      moneyEl: document.getElementById('money'),
+      staminaEl: document.getElementById('stamina'),
+      joyEl: document.getElementById('joy'),
+      fatigueEl: document.getElementById('fatigue'),
       moneyBar: document.getElementById('money-bar'),
-      energy: document.getElementById('energy'),
-      energyBar: document.getElementById('energy-bar'),
-      joy: document.getElementById('joy'),
+      staminaBar: document.getElementById('stamina-bar'),
       joyBar: document.getElementById('joy-bar'),
-      fatigue: document.getElementById('fatigue'),
       fatigueBar: document.getElementById('fatigue-bar'),
-      actions: document.getElementById('actions'),
-      task1Status: document.getElementById('task1-status'),
-      task2Status: document.getElementById('task2-status'),
-      task3Status: document.getElementById('task3-status'),
-      task1Fill: document.getElementById('task1-fill'),
-      task2Fill: document.getElementById('task2-fill'),
-      task3Fill: document.getElementById('task3-fill'),
-      achSpend: document.getElementById('ach-spend'),
-      achGossip: document.getElementById('ach-gossip'),
-      achPerfect: document.getElementById('ach-perfect'),
-      saveBtn: document.getElementById('saveBtn'),
-      loadBtn: document.getElementById('loadBtn'),
-      restartBtn: document.getElementById('restartBtn'),
-      startModal: document.getElementById('startModal'),
-      guideModal: document.getElementById('guideModal'),
-      gameOverModal: document.getElementById('gameOverModal'),
-      winModal: document.getElementById('winModal'),
-      settingModal: document.getElementById('settingModal'),
-      saveInfo: document.getElementById('saveInfo'),
-      toast: document.getElementById('toast'),
-      startNormal: document.getElementById('startNormal'),
-      skipGuide: document.getElementById('skipGuide'),
-      startGuide: document.getElementById('startGuide'),
-      restartGameOver: document.getElementById('restartGameOver'),
-      continueGame: document.getElementById('continueGame'),
-      backToMenu: document.getElementById('backToMenu'),
-      closeSetting: document.getElementById('closeSetting')
+      actionItems: document.querySelectorAll('.action-item')
     };
 
-    // ======================
-    // UTILITY FUNCTIONS
-    // ======================
-    function showToast(msg) {
-      els.toast.textContent = msg;
-      els.toast.classList.add('show');
+    // ===== 工具函数 =====
+    function notify(msg, duration = 2500) {
+      els.notification.textContent = msg;
+      els.notification.classList.add('show');
       setTimeout(() => {
-        els.toast.classList.remove('show');
-      }, 2500);
-    }
-
-    function formatMoney(n) {
-      return n.toLocaleString('zh-CN') + '¥';
+        els.notification.classList.remove('show');
+      }, duration);
     }
 
     function updateStats() {
-      // Money
-      els.money.textContent = formatMoney(gameState.money);
-      const moneyPct = Math.min(100, Math.max(0, (gameState.money / 10000) * 100));
-      els.moneyBar.style.width = `${moneyPct}%`;
+      els.moneyEl.textContent = `${gameState.money}¥`;
+      els.staminaEl.textContent = `${gameState.stamina}/${gameState.maxStamina}`;
+      els.joyEl.textContent = `${gameState.joy}/${gameState.maxJoy}`;
+      els.fatigueEl.textContent = `${gameState.fatigue}/${gameState.maxFatigue}`;
 
-      // Energy
-      els.energy.textContent = `${gameState.energy.current}/${gameState.energy.max}`;
-      const energyPct = (gameState.energy.current / gameState.energy.max) * 100;
-      els.energyBar.style.width = `${Math.max(0, energyPct)}%`;
-
-      // Joy
-      els.joy.textContent = `${gameState.joy.current}/${gameState.joy.max}`;
-      const joyPct = (gameState.joy.current / gameState.joy.max) * 100;
-      els.joyBar.style.width = `${Math.max(0, joyPct)}%`;
-
-      // Fatigue
-      els.fatigue.textContent = `${gameState.fatigue.current}/${gameState.fatigue.max}`;
-      const fatiguePct = (gameState.fatigue.current / gameState.fatigue.max) * 100;
-      els.fatigueBar.style.width = `${Math.max(0, fatiguePct)}%`;
+      // 进度条
+      els.moneyBar.style.width = `${Math.min(100, Math.max(0, (gameState.money / 10000) * 100))}%`;
+      els.staminaBar.style.width = `${(gameState.stamina / gameState.maxStamina) * 100}%`;
+      els.joyBar.style.width = `${(gameState.joy / gameState.maxJoy) * 100}%`;
+      els.fatigueBar.style.width = `${(gameState.fatigue / gameState.maxFatigue) * 100}%`;
     }
 
     function updateTasks() {
-      // Task 1: fatigue <= 35
-      const t1 = gameState.tasks.task1;
-      if (!t1.done) {
-        const pct = Math.max(0, Math.min(100, ((t1.target - gameState.fatigue.current) / (t1.target - 0)) * 100));
-        els.task1Fill.style.width = `${pct}%`;
-        els.task1Status.textContent = `剩余: ${Math.max(0, t1.target - gameState.fatigue.current)}`;
-        if (gameState.fatigue.current <= t1.target) {
-          t1.done = true;
-          gameState.money += t1.reward;
-          showToast(`✅ 任务一完成！获得${t1.reward}¥`);
+      const items = els.tasksList.querySelectorAll('.task-item');
+      items.forEach(item => {
+        const taskId = item.dataset.task;
+        const task = gameState.tasks[taskId];
+        const progressEl = item.querySelector('.task-progress');
+        const descEl = item.querySelector('.task-desc');
+
+        if (task.completed) {
+          item.classList.add('completed');
+          descEl.innerHTML = descEl.textContent.replace('✓', '') + ' ✓';
+        } else {
+          item.classList.remove('completed');
+          switch(taskId) {
+            case '1': progressEl.textContent = `${gameState.fatigue} → ${task.target}`; break;
+            case '2': progressEl.textContent = `${gameState.joy} → ${task.target}`; break;
+            case '3': progressEl.textContent = `${gameState.gossipCount}/3`; break;
+          }
         }
+      });
+    }
+
+    function updateAchievements() {
+      const spendTier = gameState.spendTiers.findIndex(t => gameState.money >= t) + 1;
+      const gossipTier = gameState.gossipTiers.findIndex(t => gameState.gossipCount >= t) + 1;
+
+      document.getElementById('ach-spend').textContent = `花费金额：${Math.min(spendTier, 10)}/10档`;
+      document.getElementById('ach-gossip').textContent = `八卦收集：${Math.min(gossipTier, 5)}/5档`;
+      document.getElementById('ach-perfect').textContent = 
+        gameState.achievements.perfect ? '完美状态：✅ 已达成' : '完美状态：⚠️ 未达成';
+
+      // 更新领取按钮状态
+      const canClaim = spendTier >= 10 || gossipTier >= 5 || gameState.achievements.perfect;
+      els.achClaimBtn.disabled = !canClaim;
+      if (canClaim) {
+        els.achRewardInfo.textContent = "✅ 可领取成就奖励：500¥";
       } else {
-        els.task1Fill.style.width = '100%';
-        els.task1Status.textContent = '已完成';
-        document.getElementById('task1').classList.add('done');
+        els.achRewardInfo.textContent = "完成任意一项成就即可领取奖励";
+      }
+    }
+
+    function checkTasks() {
+      // 任务1：疲劳 ≤ 35
+      if (!gameState.tasks[1].completed && gameState.fatigue <= gameState.tasks[1].target) {
+        gameState.tasks[1].completed = true;
+        gameState.money += 200;
+        notify("✅ 任务完成：疲劳值降至35或以下！奖励200¥");
+      }
+      // 任务2：愉悦 ≥ 75
+      if (!gameState.tasks[2].completed && gameState.joy >= gameState.tasks[2].target) {
+        gameState.tasks[2].completed = true;
+        gameState.money += 200;
+        notify("✅ 任务完成：愉悦值达75或以上！奖励200¥");
+      }
+      // 任务3：八卦 ≥ 3
+      if (!gameState.tasks[3].completed && gameState.gossipCount >= gameState.tasks[3].target) {
+        gameState.tasks[3].completed = true;
+        gameState.money += 200;
+        notify("✅ 任务完成：听到3条八卦！奖励200¥");
       }
 
-      // Task 2: joy >= 75
-      const t2 = gameState.tasks.task2;
-      if (!t2.done) {
-        const pct = Math.max(0, Math.min(100, ((gameState.joy.current - t2.target) / (t2.target - 0)) * 100));
-        els.task2Fill.style.width = `${pct}%`;
-        els.task2Status.textContent = `还需: ${Math.max(0, t2.target - gameState.joy.current)}`;
-        if (gameState.joy.current >= t2.target) {
-          t2.done = true;
-          gameState.money += t2.reward;
-          showToast(`✅ 任务二完成！获得${t2.reward}¥`);
-        }
-      } else {
-        els.task2Fill.style.width = '100%';
-        els.task2Status.textContent = '已完成';
-        document.getElementById('task2').classList.add('done');
+      // 检查是否全部完成
+      const allDone = Object.values(gameState.tasks).every(t => t.completed);
+      if (allDone && !gameState.isGameStarted) {
+        gameState.isGameStarted = true;
+        els.completeDialog.classList.add('active');
       }
+    }
 
-      // Task 3: gossip count
-      const t3 = gameState.tasks.task3;
-      if (!t3.done) {
-        const pct = (t3.count / t3.total) * 100;
-        els.task3Fill.style.width = `${pct}%`;
-        els.task3Status.textContent = `已听: ${t3.count}/${t3.total}`;
-        if (t3.count >= t3.total) {
-          t3.done = true;
-         
+    function checkAchievements() {
+      // 花费档位
+      const spendTier = gameState.spendTiers.findIndex(t => gameState.money >= t) + 1;
+      if (spendTier > gameState.achievements.spend) {
+        gameState.achievements.spend = spendTier;
+      }
+      // 八卦档位
+      const gossipTier = gameState.gossipTiers.findIndex(t => gameState.gossipCount >= t) + 1;
+      if (gossipTier > gameState.achievements.gossip) {
+        gameState.achievements.gossip = gossipTier;
+      }
+      // 完美状态
+      if (gameState.joy === 100 && gameState.fatigue === 0 && !gameState.achievements.perfect) {
+        gameState.achievements.perfect = true;
+        notify("✨ 达成隐藏成就：愉悦值100且疲劳值为0！");
+      }
+    }
+
+    function saveGame() {
+      const now = new Date();
+      const save = {
+        timestamp: now.toISOString(),
+        date: now.toLocaleDateString('zh-CN'),
+        time: now.toLocaleTimeString('zh-CN',
